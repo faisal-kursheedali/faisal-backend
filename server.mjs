@@ -8,14 +8,16 @@ import { getOptions } from "./util/options.js";
 const app = express();
 const port = 3000;
 
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTION",
-    preflightContinue: true,
-    optionsSuccessStatus: 200,
-  })
-);
+app.use(cors());
+
+// app.use(
+//   cors({
+//     origin: "*",
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTION",
+//     preflightContinue: true,
+//     optionsSuccessStatus: 200,
+//   })
+// );
 app.use(express.json());
 
 app.post("/api/actions", async (req, response) => {
