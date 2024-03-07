@@ -1,0 +1,134 @@
+// This is your Prisma schema file,
+
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model Users {
+  userId Int @id @default(autoincrement())
+  userIP String  @unique
+  countryName String
+  region String
+  city String
+  postal String
+  latitude String
+  longitude String
+  timezone String
+  org String
+  joinUTCDate DateTime
+  userVisits DateTime[]
+  countryCode String
+  regionCode String
+  navbar Navbar[]
+  footer Footer[]
+  home Home[]
+  about About[]
+  project Project[]
+  blog Blog[]
+  userNavigation UserNavigation[]
+}
+
+model Navbar {
+  id Int @id @default(autoincrement())
+  userIP String
+  path String
+  action String
+  isSideNavbar Boolean
+  desc String
+  dateTime DateTime
+  user Users @relation(references: [userIP], fields: [userIP], onDelete: Cascade, onUpdate: Cascade) 
+}
+
+model Footer {
+  id Int @id @default(autoincrement())
+  userIP String
+  path String
+  action String
+  desc String
+  dateTime DateTime
+  user Users @relation(references: [userIP], fields: [userIP], onDelete: Cascade, onUpdate: Cascade) 
+}
+model Home {
+  id Int @id @default(autoincrement())
+  userIP String
+  path String
+  action String
+  desc String
+  dateTime DateTime
+  user Users @relation(references: [userIP], fields: [userIP], onDelete: Cascade, onUpdate: Cascade) 
+}
+
+model About {
+  id Int @id @default(autoincrement())
+  userIP String
+  path String
+  action String
+  desc String
+  dateTime DateTime
+  user Users @relation(references: [userIP], fields: [userIP], onDelete: Cascade, onUpdate: Cascade) 
+}
+
+model Project {
+  id Int @id @default(autoincrement())
+  userIP String
+  path String
+  action String
+  desc String
+  dateTime DateTime
+  tittle String
+  tag String
+  type String
+  user Users @relation(references: [userIP], fields: [userIP], onDelete: Cascade, onUpdate: Cascade) 
+}
+
+model Blog {
+  id Int @id @default(autoincrement())
+  userIP String
+  path String
+  action String
+  desc String
+  dateTime DateTime
+  tittle String
+  user Users @relation(references: [userIP], fields: [userIP], onDelete: Cascade, onUpdate: Cascade) 
+}
+
+model UserNavigation {
+  id Int @id @default(autoincrement())
+  userIP String
+  navigation Json
+  userEntry DateTime
+  user Users @relation(references: [userIP], fields: [userIP], onDelete: Cascade, onUpdate: Cascade) 
+}
+
+model Options {
+  id Int @id @default(autoincrement())
+  name String @unique
+  boolValue Boolean?
+  value String?  
+}
+
+// model Error {
+//   id Int @id @default(autoincrement())
+//   message String
+//   name String
+//   stack Bytes
+//   count Int
+//   dateTime DateTime[]
+// }
+// -> do this later
+
+// model MetaData {
+//   id Int @id
+//   getUserData Boolean @default(true)
+// } -> options table is made alternative to this
