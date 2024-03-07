@@ -1,9 +1,9 @@
-import express from "express";
-import addData from "./util/addData.js";
-import addUser from "./util/addUser.js";
-import getIp from "./util/ip.js";
-import cors from "cors";
-import { getOptions } from "./util/options.js";
+const express = require("express");
+const addData = require("./util/addData.js");
+const addUser = require("./util/addUser.js");
+const getIp = require("./util/ip.js");
+const cors = require("cors");
+const { getOptions } = require("./util/options.js");
 
 const app = express();
 const port =
@@ -21,7 +21,9 @@ app.use(cors());
 // );
 app.use(express.json());
 
-app.get("/", (req, res) => res.send("Working-home"));
+app.get("/", (req, res) => {
+  res.send("Working-home");
+});
 app.get("/test", (req, res) => res.send("Working-test"));
 
 app.post("/api/actions", async (req, response) => {
