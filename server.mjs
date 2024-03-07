@@ -21,6 +21,9 @@ app.use(cors());
 // );
 app.use(express.json());
 
+app.get("/", (req, res) => res.send("Working-home"));
+app.get("/test", (req, res) => res.send("Working-test"));
+
 app.post("/api/actions", async (req, response) => {
   try {
     const res = req.body;
