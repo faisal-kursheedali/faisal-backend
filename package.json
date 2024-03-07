@@ -8,8 +8,7 @@
   },
   "scripts": {
     "start": "node server.mjs",
-    "dev": "nodemon server.mjs",
-    "build": "npm install"
+    "dev": "nodemon server.mjs"
   },
   "keywords": [],
   "author": "",
