@@ -6,7 +6,8 @@ import cors from "cors";
 import { getOptions } from "./util/options.js";
 
 const app = express();
-const port = 3000;
+const port =
+  process.env.ENVIRONMENT === "DEVELOPMENT" ? 3000 : process.env.PORT;
 
 app.use(cors());
 
