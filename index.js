@@ -44,7 +44,7 @@ app.post("/api/users", async (req, response) => {
   try {
     const reqBody = req.body;
     console.log(reqBody);
-    const ip = getIp();
+    const ip = getIp(req);
     const newUser = await addUser(ip, reqBody.date);
     if (newUser === "user_onboard") {
       return response.status(200).json({ message: "New user created" });
@@ -67,6 +67,11 @@ app.get("/api/options/:name", async (req, response) => {
     console.log(e);
     return response.status(400).json({ message: "Some thing went wrong" });
   }
+});
+
+process.on("uncaughtException", async (err) => {
+  console.error(err, "Uncaught Exception thrown");
+  await sendSlackMessage({ error });
 });
 
 app.listen(port, () => {
