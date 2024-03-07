@@ -4,6 +4,7 @@ const addUser = require("./util/addUser.js");
 const getIp = require("./util/ip.js");
 const cors = require("cors");
 const { getOptions } = require("./util/options.js");
+const bodyParser = require("body-parser");
 
 const app = express();
 const port =
@@ -19,7 +20,10 @@ app.use(cors());
 //     optionsSuccessStatus: 200,
 //   })
 // );
-app.use(express.json());
+app.use(bodyParser.raw());
+app.use(bodyParser.text());
+app.use(bodyParser.json());
+// app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Working-home");
@@ -28,7 +32,7 @@ app.get("/test", (req, res) => res.send("Working-test"));
 
 app.post("/api/actions", async (req, response) => {
   try {
-    const res = req.body;
+    const res = JSON.parse(req.body);
     const ip = getIp(req);
     const data = await addData(res.data, res.date, ip);
     return data
