@@ -29,7 +29,7 @@ const addUser = async (ip, date) => {
       return "user_visit";
     } catch (e) {
       console.log(e);
-      await addError(e);
+      await addError(e, ip);
       return false;
     }
   }
@@ -51,7 +51,7 @@ const addUser = async (ip, date) => {
     return "user_onboard";
   } catch (e) {
     console.log(e);
-    await addError(e);
+    await addError(e, ip);
     return false;
   }
 };

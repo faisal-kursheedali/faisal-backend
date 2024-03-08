@@ -37,6 +37,7 @@ model Users {
   project Project[]
   blog Blog[]
   userNavigation UserNavigation[]
+  error Error[]
 }
 
 model Navbar {
@@ -120,11 +121,12 @@ model Options {
 
 model Error {
   id Int @id @default(autoincrement())
-  name String
-  count Int
-  dateTime DateTime[]
-  message String  @db.Text
-  stack String @db.Text
+  dateTime DateTime
+  userIP String?
+  name String?
+  message String?  @db.Text
+  stack String? @db.Text
+  user Users? @relation(references: [userIP], fields: [userIP], onDelete: Cascade, onUpdate: Cascade) 
 }
 // -> do this later
 

@@ -9,7 +9,6 @@ const addData = async (data, joinDate, ip /* { navigation = false } */) => {
     return true;
   } catch (e) {
     console.log(e);
-    await addError(e);
     if (e?.meta?.field_name?.includes("userIP_fkey")) {
       try {
         console.log("Insert user then insert data");
@@ -17,11 +16,12 @@ const addData = async (data, joinDate, ip /* { navigation = false } */) => {
           await insertToDB(data, ip);
           return true;
         } else {
+          await addError(e, ip);
           return false;
         }
       } catch (e) {
         console.log(e);
-        await addError(e);
+        await addError(e, ip);
         return false;
       }
     }

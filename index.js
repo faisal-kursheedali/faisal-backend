@@ -32,6 +32,7 @@ app.get("/", (req, res) => {
 app.get("/test", (req, res) => res.send("Working-test"));
 
 app.post("/api/actions", async (req, response) => {
+  const userIP = getIp(req);
   try {
     const res = JSON.parse(req.body);
     const ip = getIp(req);
@@ -41,12 +42,13 @@ app.post("/api/actions", async (req, response) => {
       : response.status(400).json({ message: "Some thing went wrong" });
   } catch (e) {
     console.log(e);
-    await addError(e);
+    await addError(e, userIP);
     return response.status(400).json({ message: "Some thing went wrong" });
   }
 });
 
 app.post("/api/users", async (req, response) => {
+  const userIP = getIp(req);
   try {
     const reqBody = req.body;
     console.log(reqBody);
@@ -60,19 +62,20 @@ app.post("/api/users", async (req, response) => {
     return response.status(400).json({ message: "Some thing went wrong" });
   } catch (e) {
     console.log(e);
-    await addError(e);
+    await addError(e, userIP);
     return response.status(400).json({ message: "Some thing went wrong" });
   }
 });
 
 app.get("/api/options/:name", async (req, response) => {
+  const userIP = getIp(req);
   try {
     const name = req.params.name;
     const data = await getOptions({ name: name });
     return response.status(200).json({ data: data });
   } catch (e) {
     console.log(e);
-    await addError(e);
+    await addError(e, userIP);
     return response.status(400).json({ message: "Some thing went wrong" });
   }
 });
