@@ -1,6 +1,8 @@
 const { prisma } = require("../db");
+const { sendSlackError } = require("./slack");
 
-const addError = async ({ message, name, stack, dateTime }) => {
+const addError = async ({ error, dateTime }) => {
+  const { message, name, stack } = error;
   const error = await verifyError(message);
   if (error) {
     await prisma.error.update({
@@ -14,6 +16,7 @@ const addError = async ({ message, name, stack, dateTime }) => {
         id: error.id,
       },
     });
+    sendSlackError(error, false);
   } else {
     await prisma.error.create({
       data: {
@@ -24,6 +27,7 @@ const addError = async ({ message, name, stack, dateTime }) => {
         count: 1,
       },
     });
+    sendSlackError(error, true);
   }
 };
 
@@ -37,5 +41,3 @@ const verifyError = async (message) => {
 };
 
 module.exports = addError;
-
-// use this later to store error to DB

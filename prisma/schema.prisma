@@ -118,14 +118,14 @@ model Options {
   value String?  
 }
 
-// model Error {
-//   id Int @id @default(autoincrement())
-//   message String
-//   name String
-//   stack Bytes
-//   count Int
-//   dateTime DateTime[]
-// }
+model Error {
+  id Int @id @default(autoincrement())
+  message String?
+  name String?
+  stack Bytes?
+  count Int
+  dateTime DateTime[]
+}
 // -> do this later
 
 // model MetaData {

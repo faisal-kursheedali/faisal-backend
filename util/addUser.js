@@ -1,6 +1,6 @@
 const { prisma } = require("../db");
 const verifyUser = require("./verifyUser");
-const sendSlackMessage = require("./slack");
+const { sendSlackMessage } = require("./slack");
 
 const addUser = async (ip, date) => {
   const dateUTC = new Date(date);

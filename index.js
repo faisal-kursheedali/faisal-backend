@@ -73,11 +73,6 @@ app.get("/api/options/:name", async (req, response) => {
   }
 });
 
-process.on("uncaughtException", async (err) => {
-  console.error(err, "Uncaught Exception thrown");
-  await sendSlackMessage({ error });
-});
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
