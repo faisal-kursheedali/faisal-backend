@@ -5,6 +5,7 @@ const getIp = require("./util/ip.js");
 const cors = require("cors");
 const { getOptions } = require("./util/options.js");
 const bodyParser = require("body-parser");
+const addError = require("./util/error.js");
 
 const app = express();
 const port =
@@ -40,6 +41,7 @@ app.post("/api/actions", async (req, response) => {
       : response.status(400).json({ message: "Some thing went wrong" });
   } catch (e) {
     console.log(e);
+    await addError(e);
     return response.status(400).json({ message: "Some thing went wrong" });
   }
 });
@@ -58,6 +60,7 @@ app.post("/api/users", async (req, response) => {
     return response.status(400).json({ message: "Some thing went wrong" });
   } catch (e) {
     console.log(e);
+    await addError(e);
     return response.status(400).json({ message: "Some thing went wrong" });
   }
 });
@@ -69,6 +72,7 @@ app.get("/api/options/:name", async (req, response) => {
     return response.status(200).json({ data: data });
   } catch (e) {
     console.log(e);
+    await addError(e);
     return response.status(400).json({ message: "Some thing went wrong" });
   }
 });

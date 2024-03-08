@@ -120,11 +120,11 @@ model Options {
 
 model Error {
   id Int @id @default(autoincrement())
-  message String?
-  name String?
-  stack Bytes?
+  name String
   count Int
   dateTime DateTime[]
+  message String  @db.Text
+  stack String @db.Text
 }
 // -> do this later
 

@@ -1,6 +1,7 @@
 const { prisma } = require("../db");
 const verifyUser = require("./verifyUser");
 const { sendSlackMessage } = require("./slack");
+const addError = require("./error");
 
 const addUser = async (ip, date) => {
   const dateUTC = new Date(date);
@@ -28,6 +29,7 @@ const addUser = async (ip, date) => {
       return "user_visit";
     } catch (e) {
       console.log(e);
+      await addError(e);
       return false;
     }
   }
@@ -49,6 +51,7 @@ const addUser = async (ip, date) => {
     return "user_onboard";
   } catch (e) {
     console.log(e);
+    await addError(e);
     return false;
   }
 };

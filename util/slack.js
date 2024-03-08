@@ -10,11 +10,7 @@ const sendSlackMessage = async ({
   userId,
   userIP,
   error = null,
-  firstError = false,
 }) => {
-  const displayError = !firstError
-    ? "🐞 Bug in the site/ socket"
-    : "🟡🐞 Bug in the site/ socket (Encountered new error ⚠️)";
   const blocks = !error
     ? [
         {
@@ -57,7 +53,7 @@ const sendSlackMessage = async ({
           type: "section",
           text: {
             type: "mrkdwn",
-            text: displayError,
+            text: "🐞 Bug in the site/ socket",
           },
         },
         {
@@ -93,7 +89,7 @@ const sendSlackMessage = async ({
         ? process.env.SLACK_USER_ONBOARD_CHANNEL_DEV
         : process.env.SLACK_USER_VIEW_CHANNEL_DEV,
       text: error
-        ? displayError
+        ? "🐞 Bug in the site/ socket"
         : isOnboard
         ? "New user onboard 🚀"
         : "A user is viewing 👀",
@@ -108,7 +104,7 @@ const sendSlackMessage = async ({
         ? process.env.SLACK_USER_ONBOARD_CHANNEL
         : process.env.SLACK_USER_VIEW_CHANNEL,
       text: error
-        ? displayError
+        ? "🐞 Bug in the site/ socket"
         : isOnboard
         ? "New user onboard 🚀"
         : "A user is viewing 👀",
@@ -117,9 +113,9 @@ const sendSlackMessage = async ({
   }
 };
 
-const sendSlackError = (error, firstError = false) => {
+const sendSlackError = (error) => {
   console.log("before sending error to slack");
-  sendSlackMessage({ error, firstError });
+  sendSlackMessage({ error });
   return;
 };
 

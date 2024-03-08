@@ -1,6 +1,7 @@
 // const { prisma } = require("../db/db");
 const { prisma } = require("../db");
 const addUser = require("./addUser");
+const addError = require("./error");
 
 const addData = async (data, joinDate, ip /* { navigation = false } */) => {
   try {
@@ -8,6 +9,7 @@ const addData = async (data, joinDate, ip /* { navigation = false } */) => {
     return true;
   } catch (e) {
     console.log(e);
+    await addError(e);
     if (e?.meta?.field_name?.includes("userIP_fkey")) {
       try {
         console.log("Insert user then insert data");
@@ -19,6 +21,7 @@ const addData = async (data, joinDate, ip /* { navigation = false } */) => {
         }
       } catch (e) {
         console.log(e);
+        await addError(e);
         return false;
       }
     }
