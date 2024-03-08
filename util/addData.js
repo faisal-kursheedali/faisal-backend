@@ -98,7 +98,7 @@ const insertToDB = async (data, ip) => {
       data: {
         navigation: value,
         userIP: ip,
-        userEntry: new Date(data.userEntry),
+        // userEntry: new Date(data.userEntry),
       },
     });
   }

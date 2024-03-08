@@ -108,7 +108,7 @@ model UserNavigation {
   id Int @id @default(autoincrement())
   userIP String
   navigation Json
-  userEntry DateTime
+  // userEntry DateTime
   user Users @relation(references: [userIP], fields: [userIP], onDelete: Cascade, onUpdate: Cascade) 
 }
 
