@@ -17,14 +17,14 @@ const addUser = async (ip, date) => {
           userIP: ip,
         },
       });
-      await sendSlackMessage({
-        isOnboard: false,
-        country: user.countryName,
-        region: user.region,
-        city: user.city,
-        userId: user.userId,
-        userIP: user.userIP,
-      });
+      // await sendSlackMessage({
+      //   isOnboard: false,
+      //   country: user.countryName,
+      //   region: user.region,
+      //   city: user.city,
+      //   userId: user.userId,
+      //   userIP: user.userIP,
+      // });
 
       return "user_visit";
     } catch (e) {
@@ -40,14 +40,14 @@ const addUser = async (ip, date) => {
         ...data,
       },
     });
-    await sendSlackMessage({
-      isOnboard: true,
-      country: user.countryName,
-      region: user.region,
-      city: user.city,
-      userId: user.userId,
-      userIP: user.userIP,
-    });
+    // await sendSlackMessage({
+    //   isOnboard: true,
+    //   country: user.countryName,
+    //   region: user.region,
+    //   city: user.city,
+    //   userId: user.userId,
+    //   userIP: user.userIP,
+    // });
     return "user_onboard";
   } catch (e) {
     console.log(e);

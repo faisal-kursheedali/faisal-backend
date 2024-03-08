@@ -6,12 +6,6 @@ const cors = require("cors");
 const { getOptions } = require("./util/options.js");
 const bodyParser = require("body-parser");
 const addError = require("./util/error.js");
-const Slack = require("@slack/bolt");
-
-const slackApp = new Slack.App({
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
-  token: process.env.SLACK_BOT_TOKEN,
-});
 
 const app = express();
 const port =
@@ -83,11 +77,6 @@ app.get("/api/options/:name", async (req, response) => {
   }
 });
 
-slackApp.start(port || 12000);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-module.exports = {
-  slackApp,
-};
