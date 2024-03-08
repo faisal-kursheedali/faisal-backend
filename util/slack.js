@@ -1,5 +1,6 @@
 const Slack = require("@slack/bolt");
 const dotenv = require("dotenv");
+const { slackApp } = require("..");
 
 dotenv.config();
 const sendSlackMessage = async ({
@@ -75,13 +76,13 @@ const sendSlackMessage = async ({
         },
       ];
 
-  const app = new Slack.App({
-    signingSecret: process.env.SLACK_SIGNING_SECRET,
-    token: process.env.SLACK_BOT_TOKEN,
-  });
+  // const app = new Slack.App({
+  //   signingSecret: process.env.SLACK_SIGNING_SECRET,
+  //   token: process.env.SLACK_BOT_TOKEN,
+  // });
 
   if (process.env.ENVIRONMENT === "DEVELOPMENT") {
-    await app.client.chat.postMessage({
+    await slackApp.client.chat.postMessage({
       token: process.env.SLACK_BOT_TOKEN,
       channel: error
         ? process.env.SLACK_ERROR_CHANNEL_DEV
@@ -96,7 +97,7 @@ const sendSlackMessage = async ({
       blocks: blocks,
     });
   } else {
-    await app.client.chat.postMessage({
+    await slackApp.client.chat.postMessage({
       token: process.env.SLACK_BOT_TOKEN,
       channel: error
         ? process.env.SLACK_ERROR_CHANNEL
