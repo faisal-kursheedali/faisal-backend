@@ -115,7 +115,7 @@ const sendSlackMessage = async ({
 
 const sendSlackError = (error) => {
   console.log("before sending error to slack");
-  // sendSlackMessage({ error });
+  sendSlackMessage({ error });
   return;
 };
 
