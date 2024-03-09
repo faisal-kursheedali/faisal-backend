@@ -6,6 +6,10 @@ const cors = require("cors");
 const { getOptions } = require("./util/options.js");
 const bodyParser = require("body-parser");
 const addError = require("./util/error.js");
+const users = require("./pages/users.js");
+const user = require("./pages/user.js");
+const userActions = require("./pages/userActions.js");
+const { getUserIp } = require("./pages/getUserIp.js");
 
 const app = express();
 const port =
@@ -13,23 +17,36 @@ const port =
 
 app.use(cors());
 
-// app.use(
-//   cors({
-//     origin: "*",
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTION",
-//     preflightContinue: true,
-//     optionsSuccessStatus: 200,
-//   })
-// );
 app.use(bodyParser.raw());
 app.use(bodyParser.text());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(express.json());
 
+/// Deploymnet test
 app.get("/", (req, res) => {
   res.send("Working-home");
 });
 app.get("/test", (req, res) => res.send("Working-test"));
+
+/// UI view for admin
+app.get("/api/view/users", async (req, res) => {
+  const data = await users();
+  res.send(data);
+});
+app.get("/api/view/user/:id", async (req, res) => {
+  const id = req.params.id;
+  const ip = await getUserIp(id);
+  const data = await user(ip);
+  res.send(data);
+});
+app.get("/api/view/userActions/:id", async (req, res) => {
+  let hour = req.query.hour;
+  const id = req.params.id;
+  const ip = await getUserIp(id);
+  const data = await userActions(ip, Number(hour));
+  res.send(data);
+});
 
 app.post("/api/actions", async (req, response) => {
   const userIP = getIp(req);
