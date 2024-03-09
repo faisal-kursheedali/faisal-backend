@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const addError = require("./util/error.js");
 const users = require("./pages/users.js");
 const user = require("./pages/user.js");
-const userActions = require("./pages/userActions.js");
+const { userActions, allUserActions } = require("./pages/userActions.js");
 const { getUserIp } = require("./pages/getUserIp.js");
 
 const app = express();
@@ -42,9 +42,16 @@ app.get("/api/view/user/:id", async (req, res) => {
 });
 app.get("/api/view/userActions/:id", async (req, res) => {
   let hour = req.query.hour;
+  hour === null || hour === "" || hour === 0 ? (hour = 24) : "";
   const id = req.params.id;
   const ip = await getUserIp(id);
   const data = await userActions(ip, Number(hour));
+  res.send(data);
+});
+app.get("/api/view/allUserActions/", async (req, res) => {
+  let hour = req.query.hour;
+  hour === null || hour === "" || hour === 0 ? (hour = 24) : "";
+  const data = await allUserActions(Number(hour));
   res.send(data);
 });
 

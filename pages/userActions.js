@@ -129,4 +129,65 @@ const userActions = async (ip, hour = 24) => {
   }
 };
 
-module.exports = userActions;
+const allUserActions = async (hour = 24) => {
+  hour === null || hour === "" || hour === 0 ? (hour = 24) : "";
+  let lastDay = Date.now() - hour * 60 * 60 * 1000;
+  lastDay = new Date(lastDay).toISOString();
+  try {
+    const navbar = await prisma.navbar.findMany({
+      where: {
+        dateTime: {
+          gte: lastDay,
+        },
+      },
+    });
+    const footer = await prisma.footer.findMany({
+      where: {
+        dateTime: {
+          gte: lastDay,
+        },
+      },
+    });
+    const home = await prisma.home.findMany({
+      where: {
+        dateTime: {
+          gte: lastDay,
+        },
+      },
+    });
+    const about = await prisma.about.findMany({
+      where: {
+        dateTime: {
+          gte: lastDay,
+        },
+      },
+    });
+    const project = await prisma.project.findMany({
+      where: {
+        dateTime: {
+          gte: lastDay,
+        },
+      },
+    });
+    const blog = await prisma.blog.findMany({
+      where: {
+        dateTime: {
+          gte: lastDay,
+        },
+      },
+    });
+
+    return {
+      home,
+      project,
+      blog,
+      about,
+      navbar,
+      footer,
+    };
+  } catch (e) {
+    return e;
+  }
+};
+
+module.exports = { userActions, allUserActions };
