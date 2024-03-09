@@ -1,4 +1,4 @@
-const Slack = require("@slack/bolt");
+// const Slack = require("@slack/bolt");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -75,29 +75,7 @@ const sendSlackMessage = async ({
         },
       ];
 
-  // const app = new Slack.App({
-  //   signingSecret: process.env.SLACK_SIGNING_SECRET,
-  //   token: process.env.SLACK_BOT_TOKEN,
-  // });
-
   if (process.env.ENVIRONMENT === "DEVELOPMENT") {
-    // const data = await fetch("https://slack.com/api/chat.postMessage", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/x-www-form-urlencoded",
-    //   },
-    //   body: new URLSearchParams({
-    //     token: process.env.SLACK_BOT_TOKEN,
-    //     channel: process.env.SLACK_ERROR_CHANNEL_DEV,
-    //     text: error
-    //       ? "🐞 Bug in the site/ socket"
-    //       : isOnboard
-    //       ? "New user onboard 🚀"
-    //       : "A user is viewing 👀",
-    //     blocks: blocks,
-    //   }),
-    // });
-
     await fetch("https://slack.com/api/chat.postMessage", {
       method: "POST",
       headers: {
@@ -131,46 +109,7 @@ const sendSlackMessage = async ({
       .catch((error) => {
         console.error("Error:", error);
       });
-
-    // console.log(data);
-
-    // await app.client.chat.postMessage({
-    //   token: process.env.SLACK_BOT_TOKEN,
-    //   channel: error
-    //     ? process.env.SLACK_ERROR_CHANNEL_DEV
-    //     : isOnboard
-    //     ? process.env.SLACK_USER_ONBOARD_CHANNEL_DEV
-    //     : process.env.SLACK_USER_VIEW_CHANNEL_DEV,
-    //   text: error
-    //     ? "🐞 Bug in the site/ socket"
-    //     : isOnboard
-    //     ? "New user onboard 🚀"
-    //     : "A user is viewing 👀",
-    //   blocks: blocks,
-    // });
   } else {
-    // const data = await fetch("https://slack.com/api/chat.postMessage", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/x-www-form-urlencoded",
-    //   },
-    //   body: new URLSearchParams({
-    //     token: process.env.SLACK_BOT_TOKEN,
-    //     channel: error
-    //       ? process.env.SLACK_ERROR_CHANNEL
-    //       : isOnboard
-    //       ? process.env.SLACK_USER_ONBOARD_CHANNEL
-    //       : process.env.SLACK_USER_VIEW_CHANNEL,
-    //     text: error
-    //       ? "🐞 Bug in the site/ socket"
-    //       : isOnboard
-    //       ? "New user onboard 🚀"
-    //       : "A user is viewing 👀",
-    //     blocks: blocks,
-    //   }),
-    // });
-    // console.log(data);
-
     await fetch("https://slack.com/api/chat.postMessage", {
       method: "POST",
       headers: {
@@ -204,21 +143,6 @@ const sendSlackMessage = async ({
       .catch((error) => {
         console.error("Error:", error);
       });
-
-    // await app.client.chat.postMessage({
-    //   token: process.env.SLACK_BOT_TOKEN,
-    //   channel: error
-    //     ? process.env.SLACK_ERROR_CHANNEL
-    //     : isOnboard
-    //     ? process.env.SLACK_USER_ONBOARD_CHANNEL
-    //     : process.env.SLACK_USER_VIEW_CHANNEL,
-    //   text: error
-    //     ? "🐞 Bug in the site/ socket"
-    //     : isOnboard
-    //     ? "New user onboard 🚀"
-    //     : "A user is viewing 👀",
-    //   blocks: blocks,
-    // });
   }
 };
 
