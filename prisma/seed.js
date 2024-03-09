@@ -5,7 +5,7 @@ async function main() {
     data: [
       {
         name: "collectUserData",
-        boolValue: false,
+        boolValue: true,
       },
     ],
   });

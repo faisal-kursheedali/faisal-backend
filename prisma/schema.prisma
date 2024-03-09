@@ -17,6 +17,7 @@ datasource db {
 
 model Users {
   userId Int @id @default(autoincrement())
+  isAdmin Boolean? @default(false)
   userIP String  @unique
   countryName String
   region String
