@@ -98,7 +98,7 @@ const sendSlackMessage = async ({
     //   }),
     // });
 
-    fetch("https://slack.com/api/chat.postMessage", {
+    await fetch("https://slack.com/api/chat.postMessage", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
@@ -171,7 +171,7 @@ const sendSlackMessage = async ({
     // });
     // console.log(data);
 
-    fetch("https://slack.com/api/chat.postMessage", {
+    await fetch("https://slack.com/api/chat.postMessage", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
