@@ -1,6 +1,7 @@
 const objectHash = require("object-hash");
 const { prisma } = require("../db");
 const { sendSlackError } = require("./slack");
+const addUser = require("./addUser");
 
 const dateTime = new Date();
 
