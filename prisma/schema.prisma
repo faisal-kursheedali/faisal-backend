@@ -19,18 +19,18 @@ model Users {
   userId Int @id @default(autoincrement())
   isAdmin Boolean? @default(false)
   userIP String  @unique
-  countryName String
-  region String
-  city String
-  postal String
-  latitude String
-  longitude String
-  timezone String
-  org String
-  joinUTCDate DateTime
+  countryName String?
+  region String?
+  city String?
+  postal String?
+  latitude String?
+  longitude String?
+  timezone String?
+  org String?
+  joinUTCDate DateTime?
   userVisits DateTime[]
-  countryCode String
-  regionCode String
+  countryCode String?
+  regionCode String?
   navbar Navbar[]
   footer Footer[]
   home Home[]
